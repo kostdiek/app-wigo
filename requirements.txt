@@ -7,3 +7,4 @@ MarkupSafe==1.1.1
 Werkzeug==0.16.0
 requests==2.21.0
 imdbpy==6.8
+html5lib==1.0.1
