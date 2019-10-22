@@ -52,7 +52,7 @@ def index():
 @app.route('/trigger/', methods=['GET'])
 def respond():
     # Retrieve the name from url parameter
-    title = request.args.get("title", None)
+    title = request.args.get("name", None)
 
     # For debugging
     print(f"got name {title}")
