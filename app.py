@@ -63,7 +63,13 @@ def words():
         response["ERROR"] = "title can't be numeric."
     # Now the user entered a valid name
     else:
-        response["MESSAGE"] = f"Welcome {title} to our awesome platform!!"
+        ia = IMDb()
+
+        #search for the movie title
+        movie_title = ia.search_movie(title)
+        movie_id = movie_title[0].movie_id
+        movie = ia.get_movie(movie_id)
+        response["MESSAGE"] = f"Let's look at this movie: {movie} "
 
     # Return the response in json format
     return jsonify(response)
