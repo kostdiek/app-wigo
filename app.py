@@ -2,6 +2,9 @@
 from flask import Flask, request, jsonify
 app = Flask(__name__)
 
+from imdb import IMDB
+import re
+
 @app.route('/getmsg/', methods=['GET'])
 def respond():
     # Retrieve the name from url parameter
@@ -45,6 +48,30 @@ def post_something():
 @app.route('/')
 def index():
     return "<h1>Welcome to our server !!</h1>"
+
+#trigger application
+@app.route('/trigger/', methods=['GET'])
+def respond():
+    # Retrieve the name from url parameter
+    title = request.args.get("title", None)
+
+    # For debugging
+    print(f"got name {title}")
+
+    response = {}
+
+    # Check if user sent a name at all
+    if not title:
+        response["ERROR"] = "no title found, please send a title."
+    # Check if the user entered a number not a name
+    elif str(title).isdigit():
+        response["ERROR"] = "title can't be numeric."
+    # Now the user entered a valid name
+    else:
+        response["MESSAGE"] = f"Welcome {title} to our awesome platform!!"
+
+    # Return the response in json format
+    return jsonify(response)
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
