@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 #imdb package
-#from imdb import IMDb 
+from imdb import IMDb 
 
 @app.route('/getmsg/', methods=['GET'])
 def respond():
