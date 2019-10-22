@@ -68,7 +68,16 @@ def words():
         movie_title = ia.search_movie(title)
         movie_id = movie_title[0].movieID
         movie = ia.get_movie(movie_id)
-        response["MESSAGE"] = f"Let's look at this movie: {movie} "
+        #find the synopsis
+        synopsis = movie['synopsis'][0]
+        #set a trigger word
+        trigger = 'suicide'
+        #using the python find function, see if the trigger word is in the synopsis of the movie
+        trigger_lookup = synopsis.find(trigger)
+        if trigger_lookup == -1:
+            response["MESSAGE"] = f"Okay but proceed with caution"
+        else:
+            response["MESSAGE"] = f"Trigger word detected"
 
     # Return the response in json format
     return jsonify(response)
