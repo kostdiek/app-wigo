@@ -52,22 +52,22 @@ def index():
 @app.route('/trigger/', methods=['GET'])
 def respond():
     # Retrieve the name from url parameter
-    title = request.args.get("name", None)
+    name = request.args.get("name", None)
 
     # For debugging
-    print(f"got name {title}")
+    print(f"got name {name}")
 
     response = {}
 
     # Check if user sent a name at all
-    if not title:
-        response["ERROR"] = "no title found, please send a title."
+    if not name:
+        response["ERROR"] = "no name found, please send a name."
     # Check if the user entered a number not a name
-    elif str(title).isdigit():
-        response["ERROR"] = "title can't be numeric."
+    elif str(name).isdigit():
+        response["ERROR"] = "name can't be numeric."
     # Now the user entered a valid name
     else:
-        response["MESSAGE"] = f"Welcome {title} to our awesome platform!!"
+        response["MESSAGE"] = f"Welcome {name} to our awesome platform!!"
 
     # Return the response in json format
     return jsonify(response)
