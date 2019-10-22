@@ -68,7 +68,7 @@ def words():
         movie_title = ia.search_movie(title)
         movie_id = movie_title[0].movieID
         movie = ia.get_movie(movie_id)
-        response["MESSAGE"] = f"Let's look at this movie: {title} "
+        response["MESSAGE"] = f"Let's look at this movie: {movie} "
 
     # Return the response in json format
     return jsonify(response)
