@@ -1,9 +1,10 @@
 # app.py
 from flask import Flask, request, jsonify
 app = Flask(__name__)
-
+#import the imdb package
 from imdb import IMDB
-import re
+#can't remember what this was for.
+#import re
 
 @app.route('/getmsg/', methods=['GET'])
 def respond():
