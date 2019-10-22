@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 #imdb package
-from imdb import IMDb 
+from imdb import IMDb
 
 @app.route('/getmsg/', methods=['GET'])
 def respond():
@@ -43,6 +43,31 @@ def post_something():
         return jsonify({
             "ERROR": "no name found, please send a name."
         })
+
+#Trigger
+@app.route('/trigger/',  methods=['GET'])
+def words():
+    # Retrieve the name from url parameter
+    title = request.args.get("name", None)
+
+    # For debugging
+    print(f"got name {title}")
+
+    response = {}
+
+    # Check if user sent a name at all
+    if not title:
+        response["ERROR"] = "no title found, please send a title."
+    # Check if the user entered a number not a name
+    elif str(title).isdigit():
+        response["ERROR"] = "title can't be numeric."
+    # Now the user entered a valid name
+    else:
+        response["MESSAGE"] = f"Welcome {title} to our awesome platform!!"
+
+    # Return the response in json format
+    return jsonify(response)
+
 
 # A welcome message to test our server
 @app.route('/')
