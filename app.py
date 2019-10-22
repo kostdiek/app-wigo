@@ -2,10 +2,8 @@
 from flask import Flask, request, jsonify
 app = Flask(__name__)
 
-from imdb import IMDb
+from imdb import IMDB
 import re
-
-
 
 @app.route('/getmsg/', methods=['GET'])
 def respond():
@@ -54,28 +52,3 @@ def index():
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
     app.run(threaded=True, port=5000)
-
-#trigger app
-@app.route('/trigger/', methods=['GET'])
-def trigger_word():
-    #create an instance of the IMDB class
-    ia = IMDB()
-
-    # Retrieve the name from url parameter
-    title = request.args.get("title", None)
-
-    # For debugging
-    print(f"got name {title}")
-
-    response = {}
-
-    # Check if user sent a name at all
-    if not title:
-        response["ERROR"] = "no title found, please send a title."
-    # Check if the user entered a number not a name
-    elif str(title).isdigit():
-        response["ERROR"] = "title can't be numeric."
-    # Now the user entered a valid name
-    else:
-        movie_title = ia.search_movie(title)
-        response["MESSAGE"] = f"The movie is {movie_title[0]}."
