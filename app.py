@@ -88,6 +88,8 @@ def words():
 def index():
     return "<h1>Welcome to our server !!</h1>"
 
+@app.route('/hello/')
+
 @app.route('/hello/<name>')
 def hello(name=None):
     return render_template('hello.html', name=name)
