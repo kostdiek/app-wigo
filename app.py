@@ -92,7 +92,7 @@ def index():
 
 @app.route('/hello/<name>')
 def hello(name=None):
-    return render_template('hello.html', name=name)
+    return render_template('index.html', name=name)
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
