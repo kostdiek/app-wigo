@@ -2,9 +2,6 @@
 from flask import Flask, request, jsonify
 app = Flask(__name__)
 
-from imdb import IMDB
-import re
-
 @app.route('/getmsg/', methods=['GET'])
 def respond():
     # Retrieve the name from url parameter
