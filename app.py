@@ -84,22 +84,15 @@ def words():
 
 
 # A welcome message to test our server
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def index():
-    errors = []
-    trends = ''
-    if request.method == "POST":
-        # get url that the user has entered
-        try:
-            word = request.form['word']
-            # print statements just print to terminal
-            print("word was:")
-            print(word)
-        except:
-            print("error")
-    return render_template('index.html')
+    return "<h1>Welcome to our server !!</h1>"
 
-
+@app.route('/signup', methods = ['POST'])
+def signup():
+    email = request.form['email']
+    print("The email address is '" + email + "'")
+    return redirect('/')
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
