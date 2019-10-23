@@ -12,7 +12,7 @@
 
 
 
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, redirect
 app = Flask(__name__)
 
 #imdb package
@@ -98,14 +98,18 @@ def words():
 
 # A welcome message to test our server
 @app.route('/')
-def index():
-    return "<h1>Welcome to our server !!</h1>"
+def hello_world():
+    return render_template('index.html')
 
-@app.route('/signup/', methods = ['POST'])
+@app.route('/signup', methods = ['POST'])
 def signup():
     email = request.form['email']
     print("The email address is '" + email + "'")
-    return redirect('/')
+    return redirect('/thanks/')
+
+@app.route('/thanks/')
+def thanks():
+    return 'Thanks for signing up!'
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
