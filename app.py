@@ -1,4 +1,17 @@
 # app.py
+
+#Heroku app setttings: https://dashboard.heroku.com/apps/app-wigo/settings
+
+#Udacity NYC Subway Data Analysis: https://github.com/rkpaira/Udacity_NYC-Subway-Data-Analysis/blob/master/Analyzing_Subway_Data_NDFDSI.ipynb
+
+#Building an Insight App: https://gist.github.com/ericbarnhill/251df20105991674c701d33d65437a50
+
+#Deploying Flask App on Heroku: https://stackabuse.com/deploying-a-flask-application-to-heroku/
+
+#Websites with Python and Flask: https://opentechschool.github.io/python-flask/core/form-submission.html
+
+
+
 from flask import Flask, request, jsonify, render_template
 app = Flask(__name__)
 
