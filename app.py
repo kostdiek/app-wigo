@@ -88,7 +88,7 @@ def words():
 def index():
     return "<h1>Welcome to our server !!</h1>"
 
-@app.route('/signup', methods = ['POST'])
+@app.route('/signup/', methods = ['POST'])
 def signup():
     email = request.form['email']
     print("The email address is '" + email + "'")
