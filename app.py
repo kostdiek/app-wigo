@@ -12,7 +12,7 @@
 
 
 
-from flask import Flask, request, jsonify, render_template, redirect
+from flask import Flask, request, jsonify, render_template, redirect, url_for
 app = Flask(__name__)
 
 #imdb package
@@ -110,6 +110,40 @@ def signup():
 @app.route('/thanks/')
 def thanks():
     return 'Thanks for signing up!'
+
+
+@app.route('/movie', methods = ['POST'])
+def movie():
+    title = request.form['title']
+    trigger = request.form['word']
+    ia = IMDb()
+    #search for the movie title
+    movie_title = ia.search_movie(title)
+    movie_id = movie_title[0].movieID
+    movie = ia.get_movie(movie_id)
+    #find the synopsis
+    synopsis = movie['synopsis'][0]
+    #using the python find function, see if the trigger word is in the synopsis of the movie
+    trigger_lookup = synopsis.find(trigger)
+    #using the python find function, see if the trigger word is in the synopsis of the movie
+    trigger_lookup = synopsis.find(trigger)
+    if trigger_lookup == -1:
+        trigger_output = "Okay but proceed with caution"
+    else:
+        trigger_output = "Trigger word detected"
+    return render_template('movie.html', output = trigger_output, title = movie_title[0])
+
+
+    #using the python find function, see if the trigger word is in the synopsis of the movie
+    #trigger_lookup = synopsis.find(trigger)
+    #if trigger_lookup == -1:
+    #    response["MESSAGE"] = f"Okay but proceed with caution"
+    #else:
+    #    response["MESSAGE"] = f"Trigger word detected"
+
+    # Return the response in json format
+    #return jsonify(response)
+
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
