@@ -10,7 +10,10 @@
 
 #Websites with Python and Flask: https://opentechschool.github.io/python-flask/core/form-submission.html
 
+#info for dropdown list?: https://stackoverflow.com/questions/49628274/unable-to-get-value-selected-in-python-from-a-dropdown-using-flask
 
+#find process to kill:  ps -fA | grep python
+#kill process: kill -9 processNumber
 
 from flask import Flask, request, jsonify, render_template, redirect, url_for
 app = Flask(__name__)
