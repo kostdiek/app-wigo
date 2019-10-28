@@ -99,27 +99,35 @@ def movie():
 @app.route('/multi_movie', methods = ['POST'])
 def multi_movie():
     title = request.form['title2']
-    trigger = request.form['word2']
     ia = IMDb()
     #search for the movie title
     movie_title = ia.search_movie(title)
 
-    return render_template('multi_movie.html', output = trigger, title=movie_title, len=len(movie_title))
+    return render_template('multi_movie.html', title=movie_title, len=len(movie_title))
 
-@app.route('/calculate', methods = ['POST', 'GET'])
+@app.route('/calculate', methods = ['POST'])
 def calculate():
     title= -1 #default value
     msg = ''
     ia = IMDb()
+    trigger = request.form['word3']
     if request.method == "POST":
         #get id from form
         title_id = request.form['title']
         #find the movie again
         movie = ia.get_movie(title_id)
+        movie_name = movie['long imdb canonical title']
         #find the synopsis
-        #synopsis = movie['synopsis'][0]
+        synopsis = movie['synopsis'][0]
 
-    return render_template('calculate.html', title = movie)
+        #using the python find function, see if the trigger word is in the synopsis of the movie
+        trigger_lookup = synopsis.find(trigger)
+        if trigger_lookup == -1:
+            trigger_output = "Okay but proceed with caution"
+        else:
+            trigger_output = "Trigger word detected"
+
+    return render_template('calculate.html', title = movie_name, output = trigger_output)
 
 #Trigger
 #@app.route('/trigger/',  methods=['GET'])
