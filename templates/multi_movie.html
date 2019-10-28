@@ -28,13 +28,17 @@
     </ol>
   -->
 
-    <select name = title method="GET" action="/search">
-        <option value = "Please Select One" SELECTED>Please Select One </option>
-        {%for name in title %}
-        <option value = "{{name["long imdb canonical title"]}}" >{{name["long imdb canonical title"]}}</option>"
-        {%endfor%}
-    </select>
+    <form action= "/calculate" method="POST">
 
+      <select name = 'title' >
+          <option value = "Please Select One" SELECTED>Please Select One </option>
+          {%for name in title %}
+          <option value = "{{name.movieID}}" >{{name["long imdb canonical title"]}}</option>"
+          {%endfor%}
+      </select>
+
+      <input type="submit" value="Submit"></input>
+    </form>
 
 
   </body>

@@ -87,8 +87,7 @@ def movie():
     movie = ia.get_movie(movie_id)
     #find the synopsis
     synopsis = movie['synopsis'][0]
-    #using the python find function, see if the trigger word is in the synopsis of the movie
-    trigger_lookup = synopsis.find(trigger)
+
     #using the python find function, see if the trigger word is in the synopsis of the movie
     trigger_lookup = synopsis.find(trigger)
     if trigger_lookup == -1:
@@ -106,6 +105,21 @@ def multi_movie():
     movie_title = ia.search_movie(title)
 
     return render_template('multi_movie.html', output = trigger, title=movie_title, len=len(movie_title))
+
+@app.route('/calculate', methods = ['POST', 'GET'])
+def calculate():
+    title= -1 #default value
+    msg = ''
+    ia = IMDb()
+    if request.method == "POST":
+        #get id from form
+        title_id = request.form['title']
+        #find the movie again
+        movie = ia.get_movie(title_id)
+        #find the synopsis
+        #synopsis = movie['synopsis'][0]
+
+    return render_template('calculate.html', title = movie)
 
 #Trigger
 #@app.route('/trigger/',  methods=['GET'])
