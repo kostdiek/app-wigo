@@ -57,45 +57,6 @@ def post_something():
             "ERROR": "no name found, please send a name."
         })
 
-#Trigger
-@app.route('/trigger/',  methods=['GET'])
-def words():
-    # Retrieve the name from url parameter
-    title = request.args.get("name", None)
-
-    # For debugging
-    print(f"got name {title}")
-
-    response = {}
-
-    # Check if user sent a name at all
-    if not title:
-        response["ERROR"] = "no title found, please send a title."
-    # Check if the user entered a number not a name
-    elif str(title).isdigit():
-        response["ERROR"] = "title can't be numeric."
-    # Now the user entered a valid name
-    else:
-        ia = IMDb()
-        #search for the movie title
-        movie_title = ia.search_movie(title)
-        movie_id = movie_title[0].movieID
-        movie = ia.get_movie(movie_id)
-        #find the synopsis
-        synopsis = movie['synopsis'][0]
-        #set a trigger word
-        trigger = 'suicide'
-        #using the python find function, see if the trigger word is in the synopsis of the movie
-        trigger_lookup = synopsis.find(trigger)
-        if trigger_lookup == -1:
-            response["MESSAGE"] = f"Okay but proceed with caution"
-        else:
-            response["MESSAGE"] = f"Trigger word detected"
-
-    # Return the response in json format
-    return jsonify(response)
-
-
 # A welcome message to test our server
 @app.route('/')
 def hello_world():
@@ -132,6 +93,54 @@ def movie():
     else:
         trigger_output = "Trigger word detected"
     return render_template('movie.html', output = trigger_output, title = movie_title[0])
+
+@app.route('/multi_movie', methods = ['POST'])
+def multi_movie():
+    title = request.form['title2']
+    trigger = request.form['word2']
+    ia = IMDb()
+    #search for the movie title
+    movie_title = ia.search_movie(title)
+
+    return render_template('multi_movie.html', output = trigger, title=movie_title, len=len(movie_title))
+
+#Trigger
+#@app.route('/trigger/',  methods=['GET'])
+#def words():
+    # Retrieve the name from url parameter
+#    title = request.args.get("name", None)
+
+    # For debugging
+#    print(f"got name {title}")
+
+#    response = {}
+
+    # Check if user sent a name at all
+#    if not title:
+#        response["ERROR"] = "no title found, please send a title."
+    # Check if the user entered a number not a name
+#    elif str(title).isdigit():
+#        response["ERROR"] = "title can't be numeric."
+    # Now the user entered a valid name
+#    else:
+#        ia = IMDb()
+        #search for the movie title
+#        movie_title = ia.search_movie(title)
+#        movie_id = movie_title[0].movieID
+#        movie = ia.get_movie(movie_id)
+        #find the synopsis
+#        synopsis = movie['synopsis'][0]
+        #set a trigger word
+#        trigger = 'suicide'
+        #using the python find function, see if the trigger word is in the synopsis of the movie
+#        trigger_lookup = synopsis.find(trigger)
+#        if trigger_lookup == -1:
+#            response["MESSAGE"] = f"Okay but proceed with caution"
+#        else:
+#            response["MESSAGE"] = f"Trigger word detected"
+
+    # Return the response in json format
+#    return jsonify(response)
 
 
     #using the python find function, see if the trigger word is in the synopsis of the movie

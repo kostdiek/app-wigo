@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <title>Results-Karen Ostdiek</title>
+  	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/w3_template.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+  body {font-family: "Times New Roman", Georgia, Serif;}
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Playfair Display";
+    letter-spacing: 5px;
+  }
+  </style>
+
+  <body>
+
+    <h3>The result is: {{output}}</h3>
+    <h3>The possible movie titles are :</h3>
+
+  <!--
+    <ol>
+      {%for i in range(0, len)%}
+
+        <li>{{title[i]["long imdb canonical title"]}}</li>
+      {%endfor%}
+
+    </ol>
+  -->
+
+    <select name = title method="GET" action="/search">
+        <option value = "Please Select One" SELECTED>Please Select One </option>
+        {%for name in title %}
+        <option value = "{{name["long imdb canonical title"]}}" >{{name["long imdb canonical title"]}}</option>"
+        {%endfor%}
+    </select>
+
+
+
+  </body>
+</html>
