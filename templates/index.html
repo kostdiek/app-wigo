@@ -3,7 +3,7 @@
   <title>Home-Trigger App</title>
   	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/w3_template.css">
+  <!--<link rel="stylesheet" href="template/w3_template.css">-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
   body {font-family: "Times New Roman", Georgia, Serif;}
@@ -43,11 +43,25 @@
     <h2>Example: </h2>
     <p>An Example:</p>
 
-    <h4>Step 1</h4>
-    <p>Enter a movie title into the text box and click "Submit".</p>
-    <div class="w3-col m6 w3-padding-large w3-hide-small">
-     <img src="images/search_for_movie.png" class="w3-round w3-image w3-opacity-min" alt="step one to search for a movie title" width="600" height="750">
-    </div>
+    <h3>Step 1</h3>
+    <p >Enter a movie title into the text box and click "Submit".</p>
+
+    <img src="{{url_for('static', filename='images/search_for_movie.png')}}">
+
+    <h3>Step 2</h3>
+    <p>On the next page, select movie from dropdown list of results, type in your trigger, and click "Submit"</p>
+
+    <p><img src="{{url_for('static', filename='images/select_one.png')}}"></p>
+
+    <p><img src="{{url_for('static', filename='images/selected_movie_plus_trigger.png')}}"></p>
+
+    <h3>Results</h3>
+    <p>You will get one of two results - either the trigger was one or the trigger wasn't found.</p>
+
+    <p><img src="{{url_for('static', filename='images/trigger_detected_result.png')}}"></p>
+    <p><img src="{{url_for('static', filename='images/trigger_not_detected_result.png')}}"></p>
+
+
 
   </body>
 </html>
